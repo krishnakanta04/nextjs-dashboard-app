@@ -14,7 +14,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 export async function fetchRevenue() {
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
-noStore()
+  noStore();
   try {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
@@ -34,8 +34,8 @@ noStore()
 }
 
 export async function fetchLatestInvoices() {
-noStore()
-  
+  noStore();
+
   try {
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
@@ -56,8 +56,8 @@ noStore()
 }
 
 export async function fetchCardData() {
-noStore()
-  
+  noStore();
+
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
@@ -97,7 +97,7 @@ export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
 ) {
-noStore()
+  noStore();
 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -131,8 +131,8 @@ noStore()
 }
 
 export async function fetchInvoicesPages(query: string) {
-noStore()
-  
+  noStore();
+
   try {
     const count = await sql`SELECT COUNT(*)
     FROM invoices
@@ -154,8 +154,8 @@ noStore()
 }
 
 export async function fetchInvoiceById(id: string) {
-noStore()
-  
+  noStore();
+
   try {
     const data = await sql<InvoiceForm>`
       SELECT
@@ -172,7 +172,7 @@ noStore()
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
-
+    console.log(invoice);
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -181,8 +181,8 @@ noStore()
 }
 
 export async function fetchCustomers() {
-noStore()
-  
+  noStore();
+
   try {
     const data = await sql<CustomerField>`
       SELECT
@@ -201,8 +201,8 @@ noStore()
 }
 
 export async function fetchFilteredCustomers(query: string) {
-noStore()
-  
+  noStore();
+
   try {
     const data = await sql<CustomersTableType>`
 		SELECT
